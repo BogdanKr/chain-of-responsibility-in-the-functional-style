@@ -9,7 +9,7 @@ public class Main {
   @FunctionalInterface
   interface RequestHandler {
 
-    public Request handle(Request req);
+    Request handle(Request req);
 
     // !!! write a method handle that accept request and returns new request here
     // it allows to use lambda expressions for creating handlers below
@@ -37,7 +37,7 @@ public class Main {
         String digest = "";
         try {
 
-          digest = new String("CZVMYTgc3iiOdJjFP+6dhQ==");
+          digest = "CZVMYTgc3iiOdJjFP+6dhQ==";
         } catch (Exception ignored) {
         }
         return new Request(req.getData() + String.format("<digest>%s</digest>", digest));
