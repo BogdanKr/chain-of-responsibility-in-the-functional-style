@@ -1,5 +1,14 @@
 package streamApi.course;
 
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+
 public class Main {
 
   /**
@@ -85,6 +94,23 @@ public class Main {
 
   public static void main(String[] args) {
     System.out.println(commonRequestHandler.handle(new Request("New request")).getData());
+    BigInteger bigInteger = BigInteger.valueOf(7);
+    boolean probablePrime = bigInteger.isProbablePrime((int) Math.log(7));
+    System.out.println(probablePrime);
+
+    long number = 12;
+    boolean num = LongStream.rangeClosed(2, number).filter(x -> number % x == 0)
+        .allMatch(x -> x == number);
+    boolean num1 = LongStream.range(2, number).noneMatch(x -> number % x == 0);
+    System.out.println(num1);
   }
+
+  public static Stream<String> createBadWordsDetectingStream(String text, List<String> badWords) {
+    return Arrays.stream(text.split(" "))
+        .filter(badWords::contains)
+        .distinct().sorted();
+  }
+
+
 
 }
