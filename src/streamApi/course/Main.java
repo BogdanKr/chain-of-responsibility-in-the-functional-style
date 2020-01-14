@@ -111,6 +111,14 @@ public class Main {
         .distinct().sorted();
   }
 
+  public static IntStream createFilteringStream(IntStream evenStream, IntStream oddStream) {
+    List<Integer> newList = evenStream.boxed().collect(Collectors.toList());
+    newList.addAll(oddStream.boxed().collect(Collectors.toList()));
+    return newList.stream().mapToInt(Integer::new).sorted().skip(2).filter(x -> x % 3 == 0 && x % 5 == 0);
+  }
 
+  public static IntStream createFilteringStream2(IntStream evenStream, IntStream oddStream) {
+    return IntStream.concat(evenStream, oddStream).filter(i -> i % 15 == 0).sorted().skip(2);
+  }
 
 }
